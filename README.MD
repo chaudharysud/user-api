@@ -16,7 +16,7 @@ eks-cluster-cf]$ aws cloudformation create-stack --stack-name vpc-eks-cluster-st
 ```
 output:
 
-![Screenshot]()
+![Screenshot](./eks-cluster-cf/eks-cluster-completed.PNG)
 
 
 # EKS worker node group Creation
@@ -47,7 +47,7 @@ when calling the CreateStack operation: Parameters: [ClusterControlPlaneSecurity
 ```
 output:
 
-![Screenshot]()
+![Screenshot](./worker-nodes-cf/eks-workernodegroup-completed.PNG)
 
 
 
