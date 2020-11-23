@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  MYSQL_USER: POSTGRE_USER
+  MYSQL_PASSWD: POSTGRE_PASSWD
+  MYSQL_HOST: POSTGRE_HOST
+kind: ConfigMap
+metadata:
+  name: userappconfigmap
