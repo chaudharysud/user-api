@@ -5,4 +5,7 @@
     become: true
     become_user: ec2-user
     shell: ls -ltr /home/ec2-user/app/userapp
+    register: shell_result
+  - debug:
+        var: shell_result.stdout_lines
 
