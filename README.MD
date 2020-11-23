@@ -10,6 +10,10 @@
 ```console
 Setup aws configure to run aws cloudformation 
 
+download the code from github
+
+git clone https://github.com/chaudharysud/user-api
+
 i) Validate the cf yaml
 
 aws cloudformation validate-template --template-body file://./amazon-eks-vpc-private-subnets-ekscluster.yaml  --region us-east-2
@@ -53,10 +57,11 @@ output:
 
 ![Screenshot](./worker-nodes-cf/eks-workernodegroup-completed.PNG)
 
+# Question 2
 
-#Tools used :  Cloudformation, Jenkins(pipeline with inbuild plugins), git/github, docker/dockerhub, Ansible 
+# Tools used :  Cloudformation, Jenkins(pipeline with inbuild plugins), git/github, docker/dockerhub, Ansible 
 
-# Set up a KubeCtl server. Create a EC2 instance and execute following commands or pass as a userdata
+#Set up a KubeCtl server. Create a EC2 instance and execute following commands or pass as a userdata
 
 
 ```console
@@ -152,6 +157,45 @@ update the node instance role which is created after executed the worker node gr
 
 kubectl apply -f aws-auth-cm.yaml
 ```
+
+# Setup Build Server
+
+a) Setup a Build server and pass following scripts in user data
+```console
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat/jenkins.repo
+sudo rpm --import http://pkg.jenkins.io/redhat/jenkins.io.key
+sudo yum install java-1.8.0-openjdk  java-1.8.0-openjdk-devel git docker python3 jenkins –y
+sudo amazon-linux-extras install ansible2 -y
+```
+b) validate the version of installed package
+
+c) Start the docker
+    * Add user in docker deamon
+        * sudo groupadd docker
+        * sudo usermod -aG docker ${USER}
+        * logout and log in again to reflect the changes.
+  ```console
+  sudo service docker start
+  sudo usermod -aG docker jenkins ${USER}
+  
+ d) start Jenkins
+ ``` console
+ sudo service jenkins start 
+ ```
+ e) Once Jenkins is up and running enable security group to access port 8080
+ 
+ f) update the required jenkins plugins for git/docker and ansible
+ 
+ #Define the jenkins pipeline to understand the workflow 
+
+
+ 
+ 
+  
+
+  
+ 
+
 
 
 
