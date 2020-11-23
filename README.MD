@@ -258,7 +258,32 @@ node {
 
 # Smoke Test
 
-  
+#Postman request
+
+![Screenshot](postman.PNG)
+
+
+![Screenshot](database.PNG)
+
+#Kubernets resource status
+
+![Screenshot](kubernetes-checks.PNG)
+
+#user-api-healthchecks
+
+![Screenshot](user-api-healthcheck.PNG)
+
+#JekinsBuild state
+
+![Screenshot](jekinsBuild.PNG)
+
+#Jenkins jobs logs
+
+![Screenshot](Jenkins-Ansible-output.PNG)
+
+
+
+
  
 
 
