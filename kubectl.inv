@@ -1,0 +1,2 @@
+[kubectlhost]
+13.58.248.230 ansible_user=ec2-user 
