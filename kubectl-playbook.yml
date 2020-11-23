@@ -1,9 +1,37 @@
 ---
 - hosts: kubectlhost
   tasks:
-  - name: Execute a command using the shell module
-    become: true
-    become_user: ec2-user
-    command: sh /home/ec2-user/app/test.sh
+  - name: Create a staging location for deployment files  
+    file: 
+      path: /home/ec2-user/app
+      owner: ec2-user
+      group: ec2-user
+      mode: 0755 
+      state: directory
 
+  - name: Copy deployment shell script files
+    copy:
+      src: "{{ item }}"
+      dest: ~/app
+      force: yes
+      mode: 0755
+    with_fileglob: "*-userapi-*"
+
+  - name: Copy deployment menifiest files
+    copy:
+      src: "{{ item }}"
+      dest: ~/app
+      force: yes
+    with_fileglob: "userApp-*"
+
+  - name: Delete kubectl deployments
+    command: sh /home/ec2-user/app/delete-userapi-deployment.sh
+    register: deploy_del_output
+    failed_when: "'FAILED' in deploy_del_output.stderr"
+  - debug: msg="{{deploy_del_output.stdout}}"
+
+  - name: Create kubectl deployments
+    command: sh /home/ec2-user/app/create-userapi-deployment.sh
+    register: deploy_output
+  - debug: msg="{{deploy_output.stdout}}"
 
