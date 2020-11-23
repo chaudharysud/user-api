@@ -5,7 +5,10 @@
     become: true
     become_user: ec2-user
     #shell: ls -ltr /home/ec2-user/app/userapp
-    shell: kubectl get pods
+    sudo: no   
+    shell: source /home/username/.bashrc && kubectl get pods
+    args:
+       executable: /bin/bash
     register: shell_result
   - debug:
         var: shell_result.stdout_lines
