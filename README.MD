@@ -12,7 +12,9 @@ Setup aws configure to run aws cloudformation
 
 download the code from github
 
-git clone https://github.com/chaudharysud/user-api
+git clone https://github.com/chaudharysud/user-api.git
+
+refer : /eks-cluster-cf
 
 i) Validate the cf yaml
 
@@ -36,6 +38,8 @@ output:
 Setup aws configure to run aws cloudformation 
 
 i) Validate the cf yaml
+
+refer : ./worker-nodes-cf
 
 aws cloudformation validate-template --template-body file://./amazon-eks-nodegroup.yaml --region us-east-2
 
@@ -186,7 +190,50 @@ c) Start the docker
  
  f) update the required jenkins plugins for git/docker and ansible
  
- #Define the jenkins pipeline to understand the workflow 
+ # Define the jenkins pipeline
+
+```console
+node {
+    def app
+
+    stage('Clone sources') {
+        print "Workspace: ${WORKSPACE}"
+        git credentialsId: 'git', url: 'https://github.com/chaudharysud/user-api.git'
+    }
+
+    stage('Build image') {
+        /* This builds the actual image */
+
+        app = docker.build("chaudharys/hubint")
+    }
+
+    stage('Test image') {
+        
+        app.inside {
+            echo "Tests passed"
+        }
+    }
+
+    stage('Push image') {
+        /* 
+			You would need to first register with DockerHub before you can push images to your account
+		*/
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+            } 
+                echo "Trying to Push Docker Build to DockerHub"
+    }
+    
+    
+    stage('run ansible playbook') {
+        ansiblePlaybook credentialsId: 'kubectl', disableHostKeyChecking: true, installation: 'ansible2', inventory: 'kubectl.inv', playbook: 'kubectl-playbook.yml'
+    }
+    
+    
+    
+}
+```
 
 
  
