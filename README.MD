@@ -275,7 +275,7 @@ node {
 
 #JekinsBuild state
 
-![Screenshot](jekinsBuild.PNG)
+![Screenshot](jenkinsBuild.PNG)
 
 #Jenkins jobs logs
 
