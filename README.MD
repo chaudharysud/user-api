@@ -241,7 +241,7 @@ node {
 | -------------       | -------------              |
 | userApp-deploy.yml  | Deployment menifiest file  |
 | userApp-service.yml | service is defines to listern the request on 5000              |  
-| userApp-configMap.yml | used to keep the environment varibale             |  
+| userApp-configMap.yml | used to keep the environment varibale like DBHOST, DBUSER and DBPASSWD (secrets can be used )             |  
 | kubectl-playbook.yml | Ansible play book to deploy the code on kubernetes master               |  
 | kubectl.inv | Anisble inventory file , IP address of kubectl server needs to be updated here              |  
 | delete-userapi-service.sh | delete the kubectl service              |  
@@ -251,6 +251,12 @@ node {
 | worker-nodes-cf/ | clodforation stack to genrate the eks worker nodes : these are amazon provided standard tempalte            |
 | eks-cluster-cf/ | clodformation stack to generate the eks cluster : these are amazon provided standard tempalte           |
   
+  
+#One time DB creation using RDS (SQL)
+
+![Screenshot](mysql-rds.PNG)
+
+# Smoke Test
 
   
  
