@@ -4,12 +4,6 @@
   - name: Execute a command using the shell module
     become: true
     become_user: ec2-user
-    #shell: ls -ltr /home/ec2-user/app/userapp
-    sudo: no   
-    shell: source /home/username/.bashrc && kubectl get pods
-    args:
-       executable: /bin/bash
-    register: shell_result
-  - debug:
-        var: shell_result.stdout_lines
+    command: sh /home/ec2-user/app/test.sh
+
 
