@@ -24,6 +24,23 @@
       force: yes
     with_fileglob: "userApp-*"
 
+  - name: Delete kubectl elb-service
+    command: sh /home/ec2-user/app/delete-userapi-service.sh
+    register: service_del_output
+    failed_when: "'FAILED' in service_del_output.stderr"
+  - debug: msg="{{service_del_output.stdout}}"
+
+  - name: Delete kubectl configmap
+    command: sh /home/ec2-user/app/delete-userapi-configmap.sh
+    register: config_del_output
+    failed_when: "'FAILED' in config_del_output.stderr"
+  - debug: msg="{{config_del_output.stdout}}"
+
+  - name: Create kubectl configmap
+    command: sh /home/ec2-user/app/create-userapi-configmap.sh
+    register: configmap_output
+  - debug: msg="{{configmap_output.stdout}}"
+
   - name: Delete kubectl deployments
     command: sh /home/ec2-user/app/delete-userapi-deployment.sh
     register: deploy_del_output
@@ -34,4 +51,9 @@
     command: sh /home/ec2-user/app/create-userapi-deployment.sh
     register: deploy_output
   - debug: msg="{{deploy_output.stdout}}"
+
+  - name: Create kubectl elb-service
+    command: sh /home/ec2-user/app/create-userapi-service.sh
+    register: service_output
+  - debug: msg="{{service_output.stdout}}"
 
