@@ -2,4 +2,4 @@
 
 #cloudformation
 
-#Jenkins Integration with github
+#Jenkins Integration with git
