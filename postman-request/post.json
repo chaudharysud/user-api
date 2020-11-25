@@ -1,0 +1,6 @@
+POST :{"id":223448,"firstName":"Herman","lastName":"Chen","nationality":"Singapore"}
+GET: {"id":223448}
+PUT: {"id":223448,"firstName":"Herman","lastName":"Chan"}
+GET: {"id":223448}
+DELETE:{"id":223448}
+GET: {"id":223448}
