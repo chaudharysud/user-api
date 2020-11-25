@@ -162,6 +162,19 @@ update the node instance role which is created after executed the worker node gr
 kubectl apply -f aws-auth-cm.yaml
 ```
 
+# create a kubernetes load blancer (Can be automated from Jenkins one time activity)
+1) From Kubectl server execute following command
+
+```console
+#To create loadblancer
+
+~/app/create-userapi-service.sh
+
+#To delete load balance
+~/app/delete-userapi-service.sh
+
+```
+
 # Setup Build Server
 
 a) Setup a Build server and pass following scripts in user data
