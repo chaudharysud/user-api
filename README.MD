@@ -1,6 +1,6 @@
 # Question-1
 
-# Total time to setup EKS cluster and EKS nodes is around 20 mminutes
+# Total time to setup EKS cluster and EKS nodes is around 17 minutes
 
 # EKS Cluster Creation
 
@@ -204,6 +204,8 @@ c) Start the docker
  f) update the required jenkins plugins for git/docker and ansible
  
  # Define the jenkins pipeline
+ 
+ get source-code --> Test Package --> Build Image --> Test image --> Push Image --> Run Ansible
 
 ```console
 node {
@@ -212,6 +214,12 @@ node {
     stage('Clone sources') {
         print "Workspace: ${WORKSPACE}"
         git credentialsId: 'git', url: 'https://github.com/chaudharysud/user-api.git'
+    }
+    
+    stage('test package'){
+        
+        sh '/usr/local/bin/py.test -v'
+    
     }
 
     stage('Build image') {
