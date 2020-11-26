@@ -1,7 +1,7 @@
 import os
-os.environ['MYSQL_USER'] = 'root'
-os.environ['MYSQL_PASSWD'] = 'mypass'
-os.environ['MYSQL_HOST'] = 'mariadbtest'
+os.environ['MYSQL_USER'] = 'admin'
+os.environ['MYSQL_PASSWD'] = 'mysql1234'
+os.environ['MYSQL_HOST'] = 'mysqldatabase.cqzrfardfenq.us-east-2.rds.amazonaws.com'
 #os.environ['MYSQL_HOST'] = '127.0.0.1'
 import pytest
 from web import app
